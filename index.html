@@ -4,12 +4,16 @@
 <meta charset="UTF-8">
 <title>Forever 💖</title>
 
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 body{
     margin:0;
     height:100vh;
-    font-family:'Segoe UI',sans-serif;
+    font-family:'Poppins',sans-serif;
     overflow:hidden;
+    color:#fff6e5;
 }
 
 /* ---------- BACKGROUNDS ---------- */
@@ -23,7 +27,7 @@ body{
 
 .bg-yes{
     background:
-      linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
+      linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
       url("https://www.pixplet.com/wp-content/webp-express/webp-images/uploads/2026/01/Couple-Kissing-at-Sunset-on-a-Quiet-Beach.jpg.webp");
     background-size:cover;
     background-position:center;
@@ -37,62 +41,69 @@ body{
 }
 
 /* ---------- CONTENT ---------- */
-.container{text-align:center;color:white;}
+.container{text-align:center;}
 
 h1{
-    font-size:52px;
-    margin-bottom:30px;
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:32px;
+    color:#ffe9c6;
+    letter-spacing:1px;
 }
 
 .buttons{
     position:relative;
-    width:720px;
-    height:220px;
+    width:760px;
+    height:240px;
     margin:auto;
 }
 
 button{
     font-size:20px;
-    padding:16px 36px;
+    padding:16px 38px;
     border:none;
     border-radius:40px;
     cursor:pointer;
+    font-family:'Poppins',sans-serif;
 }
 
 #yesBtn{
-    background:#ff4d88;
+    background:linear-gradient(135deg,#ff4d88,#ff85a2);
     color:white;
 }
 
 #noBtn{
-    background:#222;
-    color:white;
+    background:#1f1f1f;
+    color:#f5f5f5;
     position:absolute;
     left:50%;
-    top:100px;
+    top:120px;
     transform:translateX(-50%);
     transition:transform 0.25s ease-out;
 }
 
-/* ---------- HEARTS ---------- */
+/* ---------- FLOATING HEARTS ---------- */
 .hearts{
-    position:absolute;
-    top:-120px;
-    left:50%;
-    transform:translateX(-50%);
+    position:fixed;
+    inset:0;
     pointer-events:none;
+    overflow:hidden;
 }
 
 .heart{
     position:absolute;
-    font-size:36px;
-    color:#ff69b4;
-    animation:float 1.6s ease-out forwards;
+    animation:floatUp 5s ease-in-out forwards;
 }
 
-@keyframes float{
-    from{transform:translateY(40px);opacity:1;}
-    to{transform:translateY(-100px);opacity:0;}
+@keyframes floatUp{
+    from{
+        transform:translateY(80px);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
 }
 
 /* ---------- NO EFFECTS ---------- */
@@ -127,29 +138,32 @@ button{
 .forever{
     display:none;
     text-align:center;
-    color:white;
 }
 
 .forever h2{
-    font-size:56px;
+    font-family:'Playfair Display',serif;
+    font-size:58px;
+    color:#ffe9c6;
 }
 
 .forever img{
     width:320px;
     border-radius:20px;
-    margin:20px 0;
+    margin:22px 0;
 }
 
 .backBtn{
-    background:black;
-    color:white;
-    padding:12px 26px;
+    background:#000;
+    color:#fff;
+    padding:12px 28px;
     border-radius:30px;
+    margin-top:10px;
 }
 
 .warning,.shayari{
     display:none;
-    margin-top:16px;
+    margin-top:18px;
+    font-size:18px;
 }
 </style>
 </head>
@@ -168,8 +182,6 @@ button{
       <button id="noBtn">
         Nahi Jaana, Mai sure nhi hu
       </button>
-
-      <div class="hearts" id="hearts"></div>
     </div>
   </div>
 </div>
@@ -177,7 +189,7 @@ button{
 <div class="page forever bg-yes" id="forever">
   <div>
     <h2>Will you be my Forever? 💍</h2>
-    <h2>मेरो माया... मेरो सबैथोक...</h2>
+    <h2>मेरो माया... मेरो जीवन... मेरो सबैथोक... मेरो जान... मेरी बिव</h2>
 
     <img src="https://media.giphy.com/media/G3va31oEEnIkM/giphy.gif">
 
@@ -198,6 +210,8 @@ button{
   </div>
 </div>
 
+<div class="hearts" id="hearts"></div>
+
 <audio id="noAudio">
   <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3">
 </audio>
@@ -209,19 +223,21 @@ const heartsBox = document.getElementById("hearts");
 const noAudio = document.getElementById("noAudio");
 const area = document.getElementById("btnArea");
 
-/* Hearts */
+/* BIG FLOATING HEARTS */
 yesBtn.addEventListener("mouseenter",()=>{
-  for(let i=0;i<7;i++){
+  for(let i=0;i<25;i++){
     const h=document.createElement("div");
     h.className="heart";
     h.innerHTML="💗";
-    h.style.left=Math.random()*120-60+"px";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(20+Math.random()*60)+"px";
+    h.style.animationDuration=(4+Math.random()*2)+"s";
     heartsBox.appendChild(h);
-    setTimeout(()=>h.remove(),1600);
+    setTimeout(()=>h.remove(),5000);
   }
 });
 
-/* NO button cinematic escape */
+/* NO button escape + effects */
 area.addEventListener("mousemove",(e)=>{
   const r=noBtn.getBoundingClientRect();
   const dx=e.clientX-(r.left+r.width/2);
