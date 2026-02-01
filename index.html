@@ -17,7 +17,7 @@ body{
 }
 
 /* ---------- BACKGROUNDS ---------- */
-.bg-main{
+/* .bg-main{
     background:
       linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
       url("https://media.istockphoto.com/id/488002296/photo/romantic-marriage-proposal-at-eiffel-tower-paris-france.jpg?s=1024x1024&w=is&k=20&c=wL5NW72824hPZ423_k6CsStX-DhDWgbmxINh3Siy-dg=");
@@ -31,7 +31,7 @@ body{
       url("https://www.pixplet.com/wp-content/webp-express/webp-images/uploads/2026/01/Couple-Kissing-at-Sunset-on-a-Quiet-Beach.jpg.webp");
     background-size:cover;
     background-position:center;
-}
+} */
 
 .page{
     height:100vh;
@@ -165,10 +165,27 @@ button{
     margin-top:18px;
     font-size:18px;
 }
+#bgVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* cover the whole screen */
+    z-index: -1; /* behind all content */
+    filter: brightness(0.5); /* darken the video */
+
+}
+
 </style>
 </head>
 
 <body class="bg-main">
+
+<video id="bgVideo" autoplay muted loop playsinline>
+  <source src="https://www.shutterstock.com/shutterstock/videos/3787411601/preview/stock-footage-happy-couple-in-love-walking-together-outside-in-a-winter-park-husband-and-wife-warming-each-other.webm" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
 
 <div class="page" id="main">
   <div class="container">
@@ -215,7 +232,7 @@ button{
 <audio id="noAudio">
   <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3">
 </audio>
-<audio id="yesMusic" preload="auto" loop>
+<audio id="yesMusic" preload="auto">
   <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
 </audio>
 
@@ -271,10 +288,15 @@ const yesMusic = document.getElementById("yesMusic");
 yesBtn.onclick = () => {
   // play romantic music
   yesMusic.currentTime = 0;
-  yesMusic.volume = 0.7;
+  yesMusic.volume = 0.5;
 
   yesMusic.play().catch(()=>{});
 
+  // stop after 5 seconds
+  setTimeout(() => {
+    yesMusic.pause();
+    yesMusic.currentTime = 0;
+  }, 5000); // 5000ms = 5 seconds
   // page transition
   main.style.display = "none";
   forever.style.display = "flex";
