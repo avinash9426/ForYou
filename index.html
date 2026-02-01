@@ -26,32 +26,35 @@ h1{
 
 .buttons{
     position:relative;
-    margin-top:20px;
+    width:700px;
+    height:200px;
+    margin:auto;
 }
 
 button{
-    font-size:22px;
+    font-size:20px;
     padding:14px 34px;
     border:none;
     border-radius:40px;
     cursor:pointer;
-    margin:0 25px; /* GAP BETWEEN BUTTONS */
 }
 
 #yesBtn{
     background:#ff4d88;
     color:white;
-    position:relative;
 }
 
 #noBtn{
     background:#444;
     color:white;
     position:absolute;
-    left:220px;
+    left:50%;
+    top:90px;
+    transform:translateX(-50%);
+    transition:transform 0.25s ease-out; /* GLIDE */
 }
 
-/* 💗 Floating pink hearts */
+/* 💗 Hearts */
 .hearts{
     position:absolute;
     top:-120px;
@@ -64,7 +67,6 @@ button{
     position:absolute;
     font-size:34px;
     color:#ff69b4;
-    opacity:0;
     animation:float 1.5s ease-out forwards;
 }
 
@@ -80,7 +82,7 @@ button{
 }
 
 .forever h2{
-    font-size:58px;
+    font-size:55px;
     color:#b0004f;
 }
 
@@ -98,18 +100,9 @@ button{
     margin-top:10px;
 }
 
-.warning{
-    font-size:20px;
-    margin-top:18px;
-    color:#7a0033;
+.warning,.shayari{
     display:none;
-}
-
-.shayari{
     margin-top:15px;
-    font-size:21px;
-    color:#4d0022;
-    display:none;
 }
 </style>
 </head>
@@ -119,18 +112,23 @@ button{
 <div class="container" id="main">
     <h1>Will you be my forever?</h1>
 
-    <div class="buttons">
-        <button id="yesBtn">Haan Jaana, Ye bhi koi puchne wali baat hai</button>
-        <button id="noBtn">Nahi Jaana, Mai sure nhi hu</button>
+    <div class="buttons" id="btnArea">
+        <button id="yesBtn">
+            Haan Jaana, Ye bhi koi puchne wali baat hai
+        </button>
+
+        <button id="noBtn">
+            Nahi Jaana, Mai sure nhi hu
+        </button>
+
         <div class="hearts" id="hearts"></div>
     </div>
 </div>
 
 <div class="forever" id="forever">
     <h2>Will you be my Forever? 💍</h2>
-    <h2>मेरो माया... मेरो सबैथोक... मेरो सधैंभरि... मेरो माया</h2>
+    <h2>मेरो माया... मेरो सबैथोक... मेरो सधैंभरि...</h2>
 
-    <!-- KISSING COUPLE GIF -->
     <img src="https://media.giphy.com/media/G3va31oEEnIkM/giphy.gif">
 
     <br>
@@ -158,39 +156,49 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const heartsBox = document.getElementById("hearts");
 const noAudio = document.getElementById("noAudio");
+const area = document.getElementById("btnArea");
 
-/* Pink hearts on YES hover */
+/* Hearts only on YES hover */
 yesBtn.addEventListener("mouseenter", ()=>{
-    for(let i=0;i<6;i++){
+    for(let i=0;i<7;i++){
         const h=document.createElement("div");
         h.className="heart";
         h.innerHTML="💗";
-        h.style.left=Math.random()*80-40+"px";
-        h.style.animationDelay=i*0.1+"s";
+        h.style.left=Math.random()*120-60+"px";
         heartsBox.appendChild(h);
         setTimeout(()=>h.remove(),1500);
     }
 });
 
-/* NO button + audio */
-noBtn.addEventListener("mouseenter",()=>{
-    noAudio.currentTime=0;
-    noAudio.play();
-    const x=Math.random()*300-150;
-    const y=Math.random()*200-100;
-    noBtn.style.transform=`translate(${x}px,${y}px)`;
+/* Glide-away NO button */
+area.addEventListener("mousemove",(e)=>{
+    const rect=noBtn.getBoundingClientRect();
+    const dx=e.clientX-(rect.left+rect.width/2);
+    const dy=e.clientY-(rect.top+rect.height/2);
+    const dist=Math.hypot(dx,dy);
+
+    if(dist<120){
+        noAudio.currentTime=0;
+        noAudio.play();
+
+        const angle=Math.atan2(dy,dx);
+        const moveX=-Math.cos(angle)*200;
+        const moveY=-Math.sin(angle)*200;
+
+        noBtn.style.transform=`translate(${moveX}px,${moveY}px)`;
+    }
 });
 
 /* YES click */
 yesBtn.onclick=()=>{
-    document.getElementById("main").style.display="none";
-    document.getElementById("forever").style.display="block";
+    main.style.display="none";
+    forever.style.display="block";
 };
 
-/* Fake Back */
-document.getElementById("backBtn").onclick=()=>{
-    document.getElementById("warning").style.display="block";
-    document.getElementById("shayari").style.display="block";
+/* Fake back */
+backBtn.onclick=()=>{
+    warning.style.display="block";
+    shayari.style.display="block";
 };
 </script>
 
