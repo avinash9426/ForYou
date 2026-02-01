@@ -276,15 +276,27 @@ backBtn.onclick=()=>{
 
 let audioUnlocked = false;
 
-document.addEventListener("click", () => {
-  if (!audioUnlocked) {
-    noAudio.play().then(() => {
-      noAudio.pause();
-      noAudio.currentTime = 0;
-      audioUnlocked = true;
-    }).catch(()=>{});
-  }
-}, { once: true });
+// document.addEventListener("click", () => {
+//   if (!audioUnlocked) {
+//     noAudio.play().then(() => {
+//       noAudio.pause();
+//       noAudio.currentTime = 0;
+//       audioUnlocked = true;
+//     }).catch(()=>{});
+//   }
+// }, { once: true });
+let audioUnlocked = false;
+
+    document.addEventListener("pointerdown", () => {
+      if (!audioUnlocked) {
+        noAudio.play().then(() => {
+          noAudio.pause();
+          noAudio.currentTime = 0;
+          audioUnlocked = true;
+        }).catch(()=>{});
+      }
+    }, { once:true });
+
 /* 📱 MOBILE TOUCH SUPPORT FOR NO BUTTON */
 area.addEventListener("touchstart", (e) => {
   const touch = e.touches[0];
