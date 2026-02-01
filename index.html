@@ -273,6 +273,48 @@ backBtn.onclick=()=>{
   warning.style.display="block";
   shayari.style.display="block";
 };
+
+let audioUnlocked = false;
+
+document.addEventListener("click", () => {
+  if (!audioUnlocked) {
+    noAudio.play().then(() => {
+      noAudio.pause();
+      noAudio.currentTime = 0;
+      audioUnlocked = true;
+    }).catch(()=>{});
+  }
+}, { once: true });
+/* 📱 MOBILE TOUCH SUPPORT FOR NO BUTTON */
+area.addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  const r = noBtn.getBoundingClientRect();
+
+  const dx = touch.clientX - (r.left + r.width / 2);
+  const dy = touch.clientY - (r.top + r.height / 2);
+  const dist = Math.hypot(dx, dy);
+
+  if (dist < 140) {
+    e.preventDefault(); // stop accidental click
+
+    if (audioUnlocked) {
+      noAudio.currentTime = 0;
+      noAudio.play();
+    }
+
+    const angle = Math.atan2(dy, dx);
+    noBtn.style.transform =
+      `translate(${-Math.cos(angle) * 220}px, ${-Math.sin(angle) * 220}px)`;
+
+    // 💔 visual feedback
+    const bh = document.createElement("div");
+    bh.className = "break-heart";
+    bh.innerHTML = "💔";
+    document.body.appendChild(bh);
+    setTimeout(() => bh.remove(), 600);
+  }
+}, { passive:false });
+
 </script>
 
 </body>
