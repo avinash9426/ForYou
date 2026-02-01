@@ -165,7 +165,7 @@ button{
     margin-top:18px;
     font-size:18px;
 }
-#bgVideo {
+#bgVideo #bgForeverVideo{
     position: fixed;
     top: 0;
     left: 0;
@@ -183,8 +183,12 @@ button{
 <body class="bg-main">
 
 <video id="bgVideo" autoplay muted loop playsinline>
-  <source src="https://www.shutterstock.com/shutterstock/videos/3787411601/preview/stock-footage-happy-couple-in-love-walking-together-outside-in-a-winter-park-husband-and-wife-warming-each-other.webm" type="video/mp4">
+  <source src="https://www.shutterstock.com/shutterstock/videos/1081500206/preview/stock-footage-emotional-seductive-dance-man-attracts-beautiful-blonde-woman-to-him-lifts-her-leg-dressed-in.webm" type="video/mp4">
   Your browser does not support HTML5 video.
+</video>
+    
+<video id="bgForeverVideo" autoplay muted loop playsinline style="display:none;">
+  <source src="https://www.shutterstock.com/shutterstock/videos/1089783003/preview/stock-footage-well-versed-in-the-art-of-love-making.webm" type="video/mp4">
 </video>
 
 <div class="page" id="main">
@@ -300,6 +304,10 @@ yesBtn.onclick = () => {
   // page transition
   main.style.display = "none";
   forever.style.display = "flex";
+
+    // hide main video, show forever video
+    document.getElementById("bgMainVideo").style.display = "none";
+    document.getElementById("bgForeverVideo").style.display = "block";
 };
 
 
