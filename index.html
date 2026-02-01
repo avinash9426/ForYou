@@ -215,6 +215,9 @@ button{
 <audio id="noAudio">
   <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3">
 </audio>
+<audio id="yesMusic" preload="auto" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+</audio>
 
 <script>
 const yesBtn = document.getElementById("yesBtn");
@@ -263,10 +266,20 @@ area.addEventListener("mousemove",(e)=>{
 });
 
 /* YES */
-yesBtn.onclick=()=>{
-  main.style.display="none";
-  forever.style.display="flex";
+const yesMusic = document.getElementById("yesMusic");
+
+yesBtn.onclick = () => {
+  // play romantic music
+  yesMusic.currentTime = 0;
+  yesMusic.volume = 0.7;
+
+  yesMusic.play().catch(()=>{});
+
+  // page transition
+  main.style.display = "none";
+  forever.style.display = "flex";
 };
+
 
 /* Fake Back */
 backBtn.onclick=()=>{
