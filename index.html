@@ -1,199 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Will You Be My Forever ❤️</title>
+<meta charset="UTF-8">
+<title>Forever 💖</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        background: radial-gradient(circle, #ffdde1, #ee9ca7);
-        font-family: 'Segoe UI', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+}
 
-    .container {
-        text-align: center;
-    }
+.container{text-align:center;}
 
-    h1 {
-        font-size: 52px;
-        color: #b8003f;
-        margin-bottom: 30px;
-    }
+h1{
+    font-size:50px;
+    color:#a8004f;
+    margin-bottom:30px;
+}
 
-    .buttons {
-        position: relative;
-        margin-top: 20px;
-    }
+.buttons{
+    position:relative;
+    margin-top:20px;
+}
 
-    button {
-        font-size: 22px;
-        padding: 12px 30px;
-        border-radius: 40px;
-        border: none;
-        cursor: pointer;
-        margin: 10px;
-    }
+button{
+    font-size:22px;
+    padding:14px 34px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    margin:0 25px; /* GAP BETWEEN BUTTONS */
+}
 
-    #yesBtn {
-        background: #ff0055;
-        color: white;
-        position: relative;
-        z-index: 2;
-    }
+#yesBtn{
+    background:#ff4d88;
+    color:white;
+    position:relative;
+}
 
-    #noBtn {
-        background: #444;
-        color: white;
-        position: absolute;
-    }
+#noBtn{
+    background:#444;
+    color:white;
+    position:absolute;
+    left:220px;
+}
 
-    /* ❤️ Heart */
-    .heart {
-        position: absolute;
-        top: -120px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 120px;
-        opacity: 0;
-        transition: 0.3s;
-        pointer-events: none;
-    }
+/* 💗 Floating pink hearts */
+.hearts{
+    position:absolute;
+    top:-120px;
+    left:50%;
+    transform:translateX(-50%);
+    pointer-events:none;
+}
 
-    #yesBtn:hover + .heart {
-        opacity: 1;
-    }
+.heart{
+    position:absolute;
+    font-size:34px;
+    color:#ff69b4;
+    opacity:0;
+    animation:float 1.5s ease-out forwards;
+}
 
-    /* 💥 Crackers */
-    .cracker {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background: gold;
-        border-radius: 50%;
-        animation: explode 1s linear forwards;
-    }
+@keyframes float{
+    from{transform:translateY(40px);opacity:1;}
+    to{transform:translateY(-80px);opacity:0;}
+}
 
-    @keyframes explode {
-        to {
-            transform: translate(var(--x), var(--y));
-            opacity: 0;
-        }
-    }
+/* Forever page */
+.forever{
+    display:none;
+    text-align:center;
+}
 
-    /* 💍 Forever page */
-    .forever {
-        display: none;
-        text-align: center;
-        padding: 20px;
-    }
+.forever h2{
+    font-size:58px;
+    color:#b0004f;
+}
 
-    .forever h2 {
-        font-size: 60px;
-        color: #c1004a;
-    }
+.forever img{
+    width:300px;
+    border-radius:18px;
+    margin:20px 0;
+}
 
-    .forever img {
-        width: 280px;
-        border-radius: 20px;
-        margin: 20px 0;
-    }
+.backBtn{
+    background:black;
+    color:white;
+    padding:12px 26px;
+    border-radius:30px;
+    margin-top:10px;
+}
 
-    .backBtn {
-        background: black;
-        color: white;
-        margin-top: 20px;
-    }
+.warning{
+    font-size:20px;
+    margin-top:18px;
+    color:#7a0033;
+    display:none;
+}
 
-    .shayari {
-        margin-top: 20px;
-        font-size: 20px;
-        color: #5a0033;
-        display: none;
-    }
+.shayari{
+    margin-top:15px;
+    font-size:21px;
+    color:#4d0022;
+    display:none;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container" id="mainPage">
-    <h1>Will you be my forever? 💖</h1>
+<div class="container" id="main">
+    <h1>Will you be my forever?</h1>
 
     <div class="buttons">
-        <button id="yesBtn">YES</button>
-        <div class="heart">❤️</div>
-        <button id="noBtn">NO</button>
+        <button id="yesBtn">Haan Jaana, Ye bhi koi puchne wali baat hai</button>
+        <button id="noBtn">Nahi Jaana, Mai sure nhi hu</button>
+        <div class="hearts" id="hearts"></div>
     </div>
 </div>
 
-<div class="forever" id="foreverPage">
-    <h2>Will you be my FOREVER 💍</h2>
+<div class="forever" id="forever">
+    <h2>Will you be my Forever? 💍</h2>
+    <h2>मेरो माया... मेरो सबैथोक... मेरो सधैंभरि... मेरो माया</h2>
 
-    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Love GIF">
+    <!-- KISSING COUPLE GIF -->
+    <img src="https://media.giphy.com/media/G3va31oEEnIkM/giphy.gif">
 
     <br>
     <button class="backBtn" id="backBtn">Back</button>
 
+    <div class="warning" id="warning">
+        Back button mat dabao… ab koi fayda nahi 🙂
+    </div>
+
     <div class="shayari" id="shayari">
-        <p>
-            “क़ैद कर लिया है तुम्हें अपनी मोहब्बत में,<br>
-            अब रिहाई की कोई शर्त नहीं…” – <b>गुलज़ार</b>
-        </p>
-        <p>
-            😌 <b>Ab aap meri ho chuki hai,<br>
-            ab koi wapsi possible nahi hai.</b>
-        </p>
+        “कभी तो चौक के मोड़ पर मिलो,<br>
+        हमसे न सही, हमारी तन्हाई से ही सही।”  
+        <br><b>— गुलज़ार</b><br><br>
+        😌 Ab aap meri ho chuki hai,<br>
+        ab koi wapsi possible nahi hai.
     </div>
 </div>
 
 <audio id="noAudio">
-    <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3" type="audio/mpeg">
+    <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3">
 </audio>
 
 <script>
-    const noBtn = document.getElementById("noBtn");
-    const noAudio = document.getElementById("noAudio");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const heartsBox = document.getElementById("hearts");
+const noAudio = document.getElementById("noAudio");
 
-    noBtn.style.left = "200px";
-    noBtn.style.top = "0px";
-
-    noBtn.addEventListener("mouseenter", () => {
-        const x = Math.random() * 300 - 150;
-        const y = Math.random() * 200 - 100;
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
-        noAudio.play();
-    });
-
-    document.getElementById("yesBtn").addEventListener("click", () => {
-        createCrackers();
-        setTimeout(() => {
-            document.getElementById("mainPage").style.display = "none";
-            document.getElementById("foreverPage").style.display = "block";
-        }, 800);
-    });
-
-    document.getElementById("backBtn").addEventListener("click", () => {
-        document.getElementById("shayari").style.display = "block";
-    });
-
-    function createCrackers() {
-        for (let i = 0; i < 40; i++) {
-            const c = document.createElement("div");
-            c.className = "cracker";
-            c.style.left = "50%";
-            c.style.top = "50%";
-            c.style.setProperty("--x", `${Math.random() * 400 - 200}px`);
-            c.style.setProperty("--y", `${Math.random() * 400 - 200}px`);
-            document.body.appendChild(c);
-            setTimeout(() => c.remove(), 1000);
-        }
+/* Pink hearts on YES hover */
+yesBtn.addEventListener("mouseenter", ()=>{
+    for(let i=0;i<6;i++){
+        const h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💗";
+        h.style.left=Math.random()*80-40+"px";
+        h.style.animationDelay=i*0.1+"s";
+        heartsBox.appendChild(h);
+        setTimeout(()=>h.remove(),1500);
     }
+});
+
+/* NO button + audio */
+noBtn.addEventListener("mouseenter",()=>{
+    noAudio.currentTime=0;
+    noAudio.play();
+    const x=Math.random()*300-150;
+    const y=Math.random()*200-100;
+    noBtn.style.transform=`translate(${x}px,${y}px)`;
+});
+
+/* YES click */
+yesBtn.onclick=()=>{
+    document.getElementById("main").style.display="none";
+    document.getElementById("forever").style.display="block";
+};
+
+/* Fake Back */
+document.getElementById("backBtn").onclick=()=>{
+    document.getElementById("warning").style.display="block";
+    document.getElementById("shayari").style.display="block";
+};
 </script>
 
 </body>
