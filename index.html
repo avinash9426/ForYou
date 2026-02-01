@@ -8,32 +8,52 @@
 body{
     margin:0;
     height:100vh;
-    background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
-    display:flex;
-    justify-content:center;
-    align-items:center;
     font-family:'Segoe UI',sans-serif;
     overflow:hidden;
 }
 
-.container{text-align:center;}
+/* ---------- BACKGROUNDS ---------- */
+.bg-main{
+    background:
+      linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+      url("https://media.istockphoto.com/id/488002296/photo/romantic-marriage-proposal-at-eiffel-tower-paris-france.jpg?s=1024x1024&w=is&k=20&c=wL5NW72824hPZ423_k6CsStX-DhDWgbmxINh3Siy-dg=");
+    background-size:cover;
+    background-position:center;
+}
+
+.bg-yes{
+    background:
+      linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
+      url("https://www.pixplet.com/wp-content/webp-express/webp-images/uploads/2026/01/Couple-Kissing-at-Sunset-on-a-Quiet-Beach.jpg.webp");
+    background-size:cover;
+    background-position:center;
+}
+
+.page{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ---------- CONTENT ---------- */
+.container{text-align:center;color:white;}
 
 h1{
-    font-size:50px;
-    color:#a8004f;
+    font-size:52px;
     margin-bottom:30px;
 }
 
 .buttons{
     position:relative;
-    width:700px;
-    height:200px;
+    width:720px;
+    height:220px;
     margin:auto;
 }
 
 button{
     font-size:20px;
-    padding:14px 34px;
+    padding:16px 36px;
     border:none;
     border-radius:40px;
     cursor:pointer;
@@ -45,16 +65,16 @@ button{
 }
 
 #noBtn{
-    background:#444;
+    background:#222;
     color:white;
     position:absolute;
     left:50%;
-    top:90px;
+    top:100px;
     transform:translateX(-50%);
-    transition:transform 0.25s ease-out; /* GLIDE */
+    transition:transform 0.25s ease-out;
 }
 
-/* 💗 Hearts */
+/* ---------- HEARTS ---------- */
 .hearts{
     position:absolute;
     top:-120px;
@@ -65,30 +85,58 @@ button{
 
 .heart{
     position:absolute;
-    font-size:34px;
+    font-size:36px;
     color:#ff69b4;
-    animation:float 1.5s ease-out forwards;
+    animation:float 1.6s ease-out forwards;
 }
 
 @keyframes float{
     from{transform:translateY(40px);opacity:1;}
-    to{transform:translateY(-80px);opacity:0;}
+    to{transform:translateY(-100px);opacity:0;}
 }
 
-/* Forever page */
+/* ---------- NO EFFECTS ---------- */
+.break-heart{
+    position:fixed;
+    font-size:90px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    animation:break 0.6s ease-out;
+    pointer-events:none;
+}
+
+@keyframes break{
+    0%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(2);}
+}
+
+.shake{
+    animation:shake 0.25s;
+}
+
+@keyframes shake{
+    0%{transform:translate(0,0);}
+    25%{transform:translate(-6px,4px);}
+    50%{transform:translate(6px,-4px);}
+    75%{transform:translate(-4px,6px);}
+    100%{transform:translate(0,0);}
+}
+
+/* ---------- FOREVER PAGE ---------- */
 .forever{
     display:none;
     text-align:center;
+    color:white;
 }
 
 .forever h2{
-    font-size:55px;
-    color:#b0004f;
+    font-size:56px;
 }
 
 .forever img{
-    width:300px;
-    border-radius:18px;
+    width:320px;
+    border-radius:20px;
     margin:20px 0;
 }
 
@@ -97,37 +145,39 @@ button{
     color:white;
     padding:12px 26px;
     border-radius:30px;
-    margin-top:10px;
 }
 
 .warning,.shayari{
     display:none;
-    margin-top:15px;
+    margin-top:16px;
 }
 </style>
 </head>
 
-<body>
+<body class="bg-main">
 
-<div class="container" id="main">
+<div class="page" id="main">
+  <div class="container">
     <h1>Will you be my forever?</h1>
 
     <div class="buttons" id="btnArea">
-        <button id="yesBtn">
-            Haan Jaana, Ye bhi koi puchne wali baat hai
-        </button>
+      <button id="yesBtn">
+        Haan Jaana, Ye bhi koi puchne wali baat hai
+      </button>
 
-        <button id="noBtn">
-            Nahi Jaana, Mai sure nhi hu
-        </button>
+      <button id="noBtn">
+        Nahi Jaana, Mai sure nhi hu
+      </button>
 
-        <div class="hearts" id="hearts"></div>
+      <div class="hearts" id="hearts"></div>
     </div>
+  </div>
 </div>
 
-<div class="forever" id="forever">
+<div class="page forever bg-yes" id="forever">
+  <div>
     <h2>Will you be my Forever? 💍</h2>
-    <h2>मेरो माया... मेरो सबैथोक... मेरो सधैंभरि...</h2>
+    <h2>मेरो माया... मेरो सबैथोक...</h2>
 
     <img src="https://media.giphy.com/media/G3va31oEEnIkM/giphy.gif">
 
@@ -135,20 +185,21 @@ button{
     <button class="backBtn" id="backBtn">Back</button>
 
     <div class="warning" id="warning">
-        Back button mat dabao… ab koi fayda nahi 🙂
+      Back button mat dabao… ab koi fayda nahi 🙂
     </div>
 
     <div class="shayari" id="shayari">
-        “कभी तो चौक के मोड़ पर मिलो,<br>
-        हमसे न सही, हमारी तन्हाई से ही सही।”  
-        <br><b>— गुलज़ार</b><br><br>
-        😌 Ab aap meri ho chuki hai,<br>
-        ab koi wapsi possible nahi hai.
+      “कभी तो चौक के मोड़ पर मिलो,<br>
+      हमसे न सही, हमारी तन्हाई से ही सही।”  
+      <br><b>— गुलज़ार</b><br><br>
+      😌 Ab aap meri ho chuki hai,<br>
+      ab koi wapsi possible nahi hai.
     </div>
+  </div>
 </div>
 
 <audio id="noAudio">
-    <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3">
+  <source src="https://www.myinstants.com/media/sounds/no-no-no.mp3">
 </audio>
 
 <script>
@@ -158,47 +209,53 @@ const heartsBox = document.getElementById("hearts");
 const noAudio = document.getElementById("noAudio");
 const area = document.getElementById("btnArea");
 
-/* Hearts only on YES hover */
-yesBtn.addEventListener("mouseenter", ()=>{
-    for(let i=0;i<7;i++){
-        const h=document.createElement("div");
-        h.className="heart";
-        h.innerHTML="💗";
-        h.style.left=Math.random()*120-60+"px";
-        heartsBox.appendChild(h);
-        setTimeout(()=>h.remove(),1500);
-    }
+/* Hearts */
+yesBtn.addEventListener("mouseenter",()=>{
+  for(let i=0;i<7;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💗";
+    h.style.left=Math.random()*120-60+"px";
+    heartsBox.appendChild(h);
+    setTimeout(()=>h.remove(),1600);
+  }
 });
 
-/* Glide-away NO button */
+/* NO button cinematic escape */
 area.addEventListener("mousemove",(e)=>{
-    const rect=noBtn.getBoundingClientRect();
-    const dx=e.clientX-(rect.left+rect.width/2);
-    const dy=e.clientY-(rect.top+rect.height/2);
-    const dist=Math.hypot(dx,dy);
+  const r=noBtn.getBoundingClientRect();
+  const dx=e.clientX-(r.left+r.width/2);
+  const dy=e.clientY-(r.top+r.height/2);
+  const d=Math.hypot(dx,dy);
 
-    if(dist<120){
-        noAudio.currentTime=0;
-        noAudio.play();
+  if(d<130){
+    noAudio.currentTime=0;
+    noAudio.play();
 
-        const angle=Math.atan2(dy,dx);
-        const moveX=-Math.cos(angle)*200;
-        const moveY=-Math.sin(angle)*200;
+    const a=Math.atan2(dy,dx);
+    noBtn.style.transform=`translate(${-Math.cos(a)*220}px,${-Math.sin(a)*220}px)`;
 
-        noBtn.style.transform=`translate(${moveX}px,${moveY}px)`;
-    }
+    document.body.classList.add("shake");
+
+    const bh=document.createElement("div");
+    bh.className="break-heart";
+    bh.innerHTML="💔";
+    document.body.appendChild(bh);
+    setTimeout(()=>bh.remove(),600);
+    setTimeout(()=>document.body.classList.remove("shake"),250);
+  }
 });
 
-/* YES click */
+/* YES */
 yesBtn.onclick=()=>{
-    main.style.display="none";
-    forever.style.display="block";
+  main.style.display="none";
+  forever.style.display="flex";
 };
 
-/* Fake back */
+/* Fake Back */
 backBtn.onclick=()=>{
-    warning.style.display="block";
-    shayari.style.display="block";
+  warning.style.display="block";
+  shayari.style.display="block";
 };
 </script>
 
