@@ -70,6 +70,10 @@
       display: none;
       border-radius: 15px;
     }
+    #noBtn {
+      position: absolute;
+      transition: none;
+    }
   </style>
 </head>
 
@@ -84,46 +88,50 @@
 
   <img id="gif" src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif">
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const emoji = document.getElementById("emoji");
-    const gif = document.getElementById("gif");
+<script>
+const noBtn = document.getElementById("noBtn");
+const emoji = document.getElementById("emoji");
+const gif = document.getElementById("gif");
 
-    function moveNoButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
+function moveNoButton(e) {
+  const padding = 20;
 
-    // Cursor paas aate hi bhaag jaaye
-    document.addEventListener("mousemove", (e) => {
-      const rect = noBtn.getBoundingClientRect();
-      const distance = Math.hypot(
-        e.clientX - (rect.left + rect.width / 2),
-        e.clientY - (rect.top + rect.height / 2)
-      );
+  const btnRect = noBtn.getBoundingClientRect();
 
-      if (distance < 120) {
-        moveNoButton();
+  let x = btnRect.left + (btnRect.left - e.clientX) * 1.5;
+  let y = btnRect.top + (btnRect.top - e.clientY) * 1.5;
 
-        // Angry emoji
-        emoji.style.left = rect.left + "px";
-        emoji.style.top = rect.top - 50 + "px";
-        emoji.style.display = "block";
+  // Clamp inside screen
+  x = Math.max(padding, Math.min(window.innerWidth - btnRect.width - padding, x));
+  y = Math.max(padding, Math.min(window.innerHeight - btnRect.height - padding, y));
 
-        // GIF show
-        gif.style.display = "block";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 
-        setTimeout(() => {
-          emoji.style.display = "none";
-        }, 500);
-      }
-    });
+  // Emoji
+  emoji.style.left = x + "px";
+  emoji.style.top = y - 40 + "px";
+  emoji.style.display = "block";
 
-    // Initial random position
-    moveNoButton();
-  </script>
+  gif.style.display = "block";
+
+  setTimeout(() => {
+    emoji.style.display = "none";
+  }, 400);
+}
+
+document.addEventListener("mousemove", (e) => {
+  const rect = noBtn.getBoundingClientRect();
+  const distance = Math.hypot(
+    e.clientX - (rect.left + rect.width / 2),
+    e.clientY - (rect.top + rect.height / 2)
+  );
+
+  if (distance < 150) {
+    moveNoButton(e);
+  }
+});
+</script>
 
 </body>
 </html>
